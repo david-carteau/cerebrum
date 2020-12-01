@@ -28,7 +28,7 @@ SOFTWARE.
 ##############################################################################
 
 # The library is composed of two parts :
-# - cerebrum.py : Python program which aiming at training neural networks
+# - cerebrum.py : Python program which aims at training neural networks
 #   used in the Orion UCI chess engine
 # - cerebrum.h and cerebrum.c : inference code which can be embedded in a
 #   chess engine
