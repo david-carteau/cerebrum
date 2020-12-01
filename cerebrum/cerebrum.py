@@ -42,7 +42,7 @@ Preparation:
    "pip install torch===1.7.0 torchvision===0.8.1 torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html"
 3) install scipy 1.5.4 using :
    "pip install scipy"
-4) dwongrade numpy to 1.19.3 using :
+4) downgrade numpy to 1.19.3 using :
    "pip install numpy==1.19.3"
    ==> see : https://github.com/numpy/numpy/issues/17726
 5) prepare a text file, where each line follows the format: fen;eval_w;eval_b
