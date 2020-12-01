@@ -14,4 +14,4 @@ Do not hesitate to send me feedback !
 
 Copyright 2020 by David Carteau. All rights reserved.
 
-The Cerebrum libreay is licensed under the MIT License (see "license.txt" file).
+The Cerebrum libreay is licensed under the MIT License (see "LICENSE" and "cerebrum/license.txt" files).
