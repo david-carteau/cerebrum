@@ -49,8 +49,9 @@ Preparation:
    where 'fen' is the first part of a fenstring (i.e. without stm, castling
    rights, etc.), and 'eval_w' is the evaluation in pawns (e.g.: 0.42) from
    the white perspective (idem for 'eval_b')
-6) put this script into a directory, which must also contains two empty sub-
-   folders called "data" and "networks"
+6) shuffle all the lines of the text file : this is really important !
+7) put this script and the prepared text file into a directory, which must
+   also contains two empty sub-folders called "data" and "networks"
 
 Usage:
 1) specify the name of your text file by modifying the POSITIONS_FILE variable
@@ -70,7 +71,7 @@ Notes:
    variable)
 4) you can interrupt training as you want, and resume it later: progress is
    stored at the end of each epoch (cf. MODEL variable), but you will then lose
-   reproducibility)
+   reproducibility
 5) during training, two metrics will be shown: L1 which is the average error
    with the targeted values, and L2 which is the sum of squarred errors
 6) training can be manually stopped when these two values do not significantly
@@ -88,7 +89,9 @@ LEARNING_RATE = 0.03
 MAX_EPOCHS = 1000
 SEED = 0
 
-WIDTH = 64
+# WIDTH is equivalent to NN_SIZE in cerebrum.h
+# set it to 256 to have an architecture similar to Stockfish's one
+WIDTH = 128
 RELU_MIN = 0
 RELU_MAX = 1
 
