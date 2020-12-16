@@ -99,7 +99,7 @@ HEIGHT = 40960 # do not modify
 MINI_BATCH_SIZE = 256*1024
 MODEL = "networks/state_dict_model.pt"
 
-
+USE_GPU = True
 
 ##############################################################################
 ## IMPORTS                                                                  ##
@@ -199,14 +199,12 @@ def get_sample(line):
 	return (sample_w, sample_b, eval_w, eval_b)
 #end def
 
-def load_chunk(chunk):
+def load_chunk(chunk, index):
 	#print("Loading chunk...", chunk)
-	
-	assert(INDEX is not None)
 	
 	with open(POSITIONS_FILE, "r") as file:
 		lines = []
-		file.seek(INDEX[chunk], 0)
+		file.seek(index[chunk], 0)
 		for line in file:
 			lines.append(line)
 			if len(lines) >= MINI_BATCH_SIZE // 2:
@@ -371,7 +369,12 @@ index = prepare_data()
 random.seed(SEED)
 torch.manual_seed(SEED)
 
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
+if USE_GPU:
+	device = "cuda:0" if torch.cuda.is_available() else "cpu"
+else:
+	device = "cpu"
+#end if
+
 model = Net().to(device)
 
 try:
@@ -407,7 +410,7 @@ for epoch in range(MAX_EPOCHS):
 				(X1, X2, y) = pickle.load(file)
 			#end with
 		except:
-			X, y = load_chunk(chunk)
+			X, y = load_chunk(chunk, index)
 			assert(X is not None and y is not None)
 			
 			X1 = convert_sparse_matrix_to_sparse_tensor(X[:,:HEIGHT])
