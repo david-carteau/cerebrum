@@ -18,19 +18,20 @@ The **Cerebrum library** can be used to train and utilize "[NNUE](https://www.ch
 
 ## Content and prerequisites
 
-The library consists of three main parts:
+The library consists of four main parts:
 
-1. **Training code** (Python script)
-2. **Inference code** (C files)
-3. A **basic UCI chess engine** for demonstration purposes (Python script)
+1. **Data preparation code** (Python scripts)
+2. **Training code** (Python script)
+3. **Inference code** (C files)
+4. A **basic UCI chess engine** for demonstration purposes (Python script)
 
 <br/>
 
-To use the library, you will need:
+To use the library, you will first need to:
 
-- A **Python** runtime: https://www.python.org/
-- Some Python librairies: `pip install torch numpy scipy tqdm chess`
-- To download the [pgn-extract](https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/) tool and put the `pgn-extract.exe` file in the folder `./1. training/1. data preparation`
+- Install a **Python** runtime: https://www.python.org/
+- Install some Python librairies: `pip install torch numpy scipy tqdm chess`
+- Download the [pgn-extract](https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/) tool and put the `pgn-extract.exe` file in the folder `./1. data preparation`
 
 <br/>
 
@@ -71,7 +72,7 @@ The second option is useful when you already have a good idea of the win ratio a
 
 ### Output
 
-Trained networks will be located in the folder `./1. training/2. training/networks/`. One network will be saved at the end of each training epoch. By default:
+Trained networks will be located in the folder `./2. training/networks/`. One network will be saved at the end of each training epoch. By default:
 
 - `epoch-5.txt` will be the last standard network (i.e. full precision: weights and biases are stored as `float`)
 - `epoch-5-q.txt` will be the last quantized network (i.e. less precision, but high inference speed: weights and biases are stored as `int8`)
@@ -82,8 +83,8 @@ Trained networks will be located in the folder `./1. training/2. training/networ
 
 If you want to obtain the exact same neural network used in Orion 1.0, additional steps are required (here, for Windows):
 
-- Download the [3, 4, 5 pieces](http://tablebase.sesse.net/syzygy/3-4-5/) endgame **Syzygy tablebases** and put them in the folder `./1. training/1. data preparation/syzygy/3-4-5/`
-- Download the [6 pieces](http://tablebase.sesse.net/syzygy/6-WDL/) endgame Syzygy tablebases and put them in the folder `./1. training/1. data preparation/syzygy/6-pieces/`
+- Download the [3, 4, 5 pieces](http://tablebase.sesse.net/syzygy/3-4-5/) endgame **Syzygy tablebases** and put them in the folder `./1. data preparation/syzygy/3-4-5/`
+- Download the [6 pieces](http://tablebase.sesse.net/syzygy/6-WDL/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/6-pieces/`
 - Download [CCRL 40/4 archive](https://computerchess.org.uk/ccrl/402.archive/games.html) + [CCRL BLITZ](https://computerchess.org.uk/ccrl/404/games.html) + [CCRL 40/15](https://computerchess.org.uk/ccrl/4040/games.html) games, unzip the 3 files to the folder `./1. training/1. data preparation/pgn/`
 
 <br/>
