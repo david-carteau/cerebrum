@@ -86,7 +86,7 @@ The provided file must be called `positions-shuffled.txt` and be placed in the f
 
 Launch the script `train.bat` in the folder `./2. training/`.
 
-This script will parse the `positions-shuffled.txt` file in the folder `./2. training/positions/`, split it in batches of training data (this step can be long), and then use these traininng data to train the neural network.
+This script will parse the `positions-shuffled.txt` file in the folder `./2. training/positions/`, split it in batches of training data (this step can be long), and then use these data to train the neural network.
 
 <br/>
 
