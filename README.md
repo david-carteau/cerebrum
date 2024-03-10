@@ -55,6 +55,8 @@ This script will parse games and compute the average win ratio for each encounte
 
 Copy the `positions-shuffled.txt` file to the folder `./2. training/positions/`
 
+Note that, **by default, all games after 31.12.2023 will be ignored**. You can easily modify this by editing the script `prepare.bat` (see source to know how).
+
 <br/>
 
 ### Input (2<sup>nd</sup> alternative)
@@ -165,11 +167,11 @@ Important: to obtain the exact same neural network, let the `FORCE_CPU_DEVICE` v
 
 <br/>
 
-Feel free to adapt the library to meet your specific needs! 🌟
+## Copyright, license
+
+Feel free to adapt the library to meet your specific needs, and do not hesitate to provide feedback ! 🌟
 
 <br/>
-
-## Copyright, license
 
 Copyright 2024 by David Carteau. All rights reserved.
 
