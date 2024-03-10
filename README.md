@@ -8,10 +8,10 @@ The **Cerebrum library** can be used to train and utilize "[NNUE](https://www.ch
 
 ## Changes in 1.0
 
-- **Training is now based on games results** (from which a win ratio is deduced for each position during a game) and **material only** !
+- **Training now relies on game results** (from which a win ratio is deduced for each position during a game) and **material only** !
 - **Data preparation** scripts are provided to automate the preparation of training data (using one or several pgn files)
-- **Network quantization** is performed at the end of each training epoch, letting the choice between better accuracy or increased inference speed
-- A very basic UCI chess engine is provided in two versions (standard or quantized) to show how to load and use the network trained
+- **Network quantization** is performed at the end of each training epoch, allowing the choice between better accuracy or increased inference speed
+- A very basic UCI chess engine is provided in two versions (standard or quantized) to demonstrate how to load and use the network trained
 - Inference C code is now also available in two versions (standard or quantized)
 
 <br/>
