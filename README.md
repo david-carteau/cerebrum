@@ -103,7 +103,10 @@ By default:
 
 ### How to use trained networks
 
-These networks can now be used in your own engine, using the provided inference code, or your own code !
+These networks can now be used in your own engine, using your own code, or:
+
+- using the provided inference C code in `./3. inference/1. standard/` or `./3. inference/2. quantized/` folders
+- using the provided inference Python code located in the `./4. engine/1. standard/` or `./4. engine/2. quantized/` folders
 
 <br/>
 
