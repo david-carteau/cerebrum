@@ -11,7 +11,7 @@ The **Cerebrum library** can be used to train and utilize "[NNUE](https://www.ch
 - **Training now relies on game results** (from which a win ratio is deduced for each position during a game) and **material only** !
 - **Data preparation** scripts are provided to automate the preparation of training data (using one or several pgn files)
 - **Network quantization** is performed at the end of each training epoch, allowing the choice between better accuracy or increased inference speed
-- A very basic UCI chess engine is provided in two versions (standard or quantized) to demonstrate how to load and use the network
+- A **basic UCI chess engine** is provided in two versions (standard or quantized) to demonstrate how to load and use the network
 - Inference C code is now also available in two versions (standard or quantized)
 
 <br/>
@@ -31,7 +31,7 @@ To use the library, you will first need to:
 
 - Install a **Python** runtime: https://www.python.org/
 - Install some Python librairies: `pip install torch numpy scipy tqdm chess`
-- Download the [pgn-extract](https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/) tool and put the `pgn-extract.exe` file in the folder `./1. data preparation`
+- Download the [pgn-extract](https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/) tool and put the `pgn-extract.exe` file in the folder `./1. data preparation/`
 
 <br/>
 
@@ -42,14 +42,23 @@ Note that, **by default, training is forced to use the CPU**. If you have an NVI
 
 <br/>
 
-## Usage
+## Usage (Windows)
 
-### Input
+### Input (1st alternative)
 
-You can choose to provide:
+You can choose to provide one or several pgn files containing full games in the folder `./1. data preparation/pgn/`.
 
-- Either one or several pgn files containing full games
-- Or an handcrafted file containing position (fenstring), side to move, popcount, number of occurences of this position, win ratio:
+Then launch the script `prepare.bat` in the folder `./1. data preparation/` to obtain a file named `positions-shuffled.txt` which will be stored in the same folder.
+
+This script will parse games and compute the average win ratio for each encountered position in games. It will also add some other statistical information (popcount, number of occurences of each position).
+
+Copy the `positions-shuffled.txt` file to the folder `./2. training/positions/`
+
+<br/>
+
+### Input (2nd alternative)
+
+Prepare your own handcrafted file containing position (fenstring), side to move, popcount, number of occurences of this position, win ratio:
 
 ```
 2r3k1/1q3p1p/6p1/3p4/1r3N2/2n5/2PQ1PPP/R2R2K1 w 18 1 1.0
@@ -66,16 +75,64 @@ r5k1/pb3rb1/3Rn1p1/Rp2p2p/4PP1P/2P1BNP1/4NK2/8 b 22 1 0.5
 
 <br/>
 
-The second option is useful when you already have a good idea of the win ratio associated to some positions. In this case, the file must be called `positions-shuffled.txt`, and be placed in the folder `./1. training/2. training/positions/`.
+This alternative can be useful when you already have a good idea of the win ratio associated to a (large) bunch of positions.
+
+The provided file must be called `positions-shuffled.txt` and be placed in the folder `./2. training/positions/`.
+
+<br/>
+
+### Training
+
+Launch the script `train.bat` in the folder `./2. training/`.
+
+This script will parse the `positions-shuffled.txt` file in the folder `./2. training/positions/`, split it in batches of training data (this step can be long), and then use these traininng data to train the neural network.
 
 <br/>
 
 ### Output
 
-Trained networks will be located in the folder `./2. training/networks/`. One network will be saved at the end of each training epoch. By default:
+Trained networks will be located in the folder `./2. training/networks/`. One network will be saved at the end of each training epoch.
+
+By default:
 
 - `epoch-5.txt` will be the last standard network (i.e. full precision: weights and biases are stored as `float`)
 - `epoch-5-q.txt` will be the last quantized network (i.e. less precision, but high inference speed: weights and biases are stored as `int8`)
+
+<br/>
+
+### How to use trained networks
+
+These networks can now be used in your own engine, using the provided inference code, or your own code !
+
+<br/>
+
+In order to use your own trained network with the provided Cerebrum UCI chess engine:
+
+- Copy the `epoch-5.txt` (resp. the `epoch-5-q.txt`) file in the folder `4. engine/1. standard/` (resp. `4. engine/2. quantized/`
+- Rename it to `network.txt`
+- Launch the engine
+
+<br/>
+
+In order to use your own trained network with Orion UCI chess engine (assuming you did not change the network architecture):
+
+- Install a copy of Orion in a distinct folder of the regular Orion
+- Remove any `orion64-v1.0.nn` or `network.txt` existing file in that folder
+- Copy the `epoch-5-q.txt` file in the folder
+- Rename it to `network.txt`
+- Launch the copy of Orion: Orion will not find any `orion64-v1.0.nn` file, but will find a `network.txt` file, and then will convert it to a new `orion64-v1.0.nn` file
+- Rename `orion64-v1.0.nn` as you want
+
+Note: this is not super user-friendly, and will be enhanced in a next version ;-)
+
+<br/>
+
+## How to configure name and author
+
+You can adjust the name and author of the trained networks:
+
+- Before training, by modifying the `NN_NAME` (default = "Orion 1.0") and `NN_AUTHOR` (default = "David Carteau") variables in the script `train.py` located in the folder `./2. training/` (see lines 59 and 60)
+- After training, by modifying the first two lines of the generated networks (default = "name=Orion 1.0" and "author=David Carteau")
 
 <br/>
 
@@ -85,7 +142,7 @@ If you want to obtain the exact same neural network used in Orion 1.0, additiona
 
 - Download the [3, 4, 5 pieces](http://tablebase.sesse.net/syzygy/3-4-5/) endgame **Syzygy tablebases** and put them in the folder `./1. data preparation/syzygy/3-4-5/`
 - Download the [6 pieces](http://tablebase.sesse.net/syzygy/6-WDL/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/6-pieces/`
-- Download [CCRL 40/4 archive](https://computerchess.org.uk/ccrl/402.archive/games.html) + [CCRL BLITZ](https://computerchess.org.uk/ccrl/404/games.html) + [CCRL 40/15](https://computerchess.org.uk/ccrl/4040/games.html) games, unzip the 3 files to the folder `./1. training/1. data preparation/pgn/`
+- Download [CCRL 40/4 archive](https://computerchess.org.uk/ccrl/402.archive/games.html) + [CCRL BLITZ](https://computerchess.org.uk/ccrl/404/games.html) + [CCRL 40/15](https://computerchess.org.uk/ccrl/4040/games.html) games, unzip the 3 files to the folder `./1. data preparation/pgn/`
 
 <br/>
 
