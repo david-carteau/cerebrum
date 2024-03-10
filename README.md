@@ -45,7 +45,7 @@ Note that, **by default, training is forced to use the CPU**. If you have an NVI
 
 ## Usage (Windows)
 
-### Input (1st alternative)
+### Input (1<sup>st</sup> alternative)
 
 You can choose to provide one or several pgn files containing full games in the folder `./1. data preparation/pgn/`.
 
@@ -57,7 +57,7 @@ Copy the `positions-shuffled.txt` file to the folder `./2. training/positions/`
 
 <br/>
 
-### Input (2nd alternative)
+### Input (2<sup>nd</sup> alternative)
 
 Prepare your own handcrafted file containing position (fenstring), side to move, popcount, number of occurences of this position, win ratio:
 
