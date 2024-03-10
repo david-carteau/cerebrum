@@ -174,6 +174,6 @@ Feel free to adapt the library to meet your specific needs, and do not hesitate 
 
 <br/>
 
-Copyright 2024 by David Carteau. All rights reserved.
-
 The Cerebrum library is licensed under the **MIT License** (see "LICENSE" and "/v1.0/license.txt" files).
+
+Copyright 2024 by David Carteau. All rights reserved.
