@@ -29,8 +29,8 @@ The library consists of four main parts:
 
 To use the library, you will first need to:
 
-- Download the v1.0 folder of this repository
-- Install a **Python** runtime: https://www.python.org/
+- Download the `v1.0` folder of this repository
+- Install a Python runtime: https://www.python.org/
 - Install some Python librairies: `pip install torch numpy scipy tqdm chess`
 - Download the [pgn-extract](https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/) tool and put the `pgn-extract.exe` file in the folder `./1. data preparation/`
 
@@ -51,7 +51,7 @@ You can choose to provide one or several pgn files containing full games in the 
 
 Then launch the script `prepare.bat` in the folder `./1. data preparation/` to obtain a file named `positions-shuffled.txt` which will be stored in the same folder.
 
-This script will parse games and compute the average win ratio for each encountered position in games. It will also add some other statistical information (popcount, number of occurences of each position).
+This script will parse games and compute the average win ratio for each encountered position in all the games. It will also add some other statistical information (popcount, number of occurences of each position).
 
 Copy the `positions-shuffled.txt` file to the folder `./2. training/positions/`
 
