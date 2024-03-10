@@ -152,8 +152,9 @@ If you want to obtain the exact same neural network used in Orion 1.0, additiona
 
 <br/>
 
-You will also need to install these specific versions of Python librairies:
+You will also need to use these specific versions of Python and Python librairies:
 
+- `Python 3.11.7`
 - `torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu`
 - or, if you have an **NVIDIA GPU** `torch==2.1.2 --index-url https://download.pytorch.org/whl/cu121`
 - `numpy==1.26.3`
@@ -173,6 +174,6 @@ Feel free to adapt the library to meet your specific needs, and do not hesitate 
 
 <br/>
 
-Copyright 2024 by David Carteau. All rights reserved.
-
 The Cerebrum library is licensed under the **MIT License** (see "LICENSE" and "/v1.0/license.txt" files).
+
+Copyright 2024 by David Carteau. All rights reserved.
