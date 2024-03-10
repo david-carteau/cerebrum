@@ -152,8 +152,9 @@ If you want to obtain the exact same neural network used in Orion 1.0, additiona
 
 <br/>
 
-You will also need to install these specific versions of Python librairies:
+You will also need to use these specific versions of Python and Python librairies:
 
+- `Python 3.11.7`
 - `torch==2.1.2 --index-url https://download.pytorch.org/whl/cpu`
 - or, if you have an **NVIDIA GPU** `torch==2.1.2 --index-url https://download.pytorch.org/whl/cu121`
 - `numpy==1.26.3`
