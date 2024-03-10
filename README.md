@@ -16,7 +16,7 @@ The **Cerebrum library** can be used to train and utilize "[NNUE](https://www.ch
 
 <br/>
 
-## Content and prerequisites
+## Content and prerequisites (Windows)
 
 The library consists of four main parts:
 
@@ -138,7 +138,7 @@ You can adjust the name and author of the trained networks:
 
 ## How to replicate Orion 1.0's neural network
 
-If you want to obtain the exact same neural network used in Orion 1.0, additional steps are required (here, for Windows):
+If you want to obtain the exact same neural network used in Orion 1.0, additional steps are required:
 
 - Download the [3, 4, 5 pieces](http://tablebase.sesse.net/syzygy/3-4-5/) endgame **Syzygy tablebases** and put them in the folder `./1. data preparation/syzygy/3-4-5/`
 - Download the [6 pieces](http://tablebase.sesse.net/syzygy/6-WDL/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/6-pieces/`
