@@ -54,6 +54,8 @@ You can choose to provide as an **input**:
 `5rk1/5pbp/1qN1b1p1/1PQnP3/r3B3/3p1N2/p2P1PPP/2R2RK1 w 25 1 0.5`<p>
 `2b1k3/2p5/1pP5/4rp2/2B1pNpP/1P6/PKP5/3R4 w 17 1 1.0`<p>
 
+<br/>
+
 In the latter case, the file must be called `positions-shuffled.txt`, and be placed in the folder `./1. training/2. training/positions/`
 
 <br/>
