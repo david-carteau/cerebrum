@@ -29,6 +29,7 @@ The library consists of four main parts:
 
 To use the library, you will first need to:
 
+- Download the v1.0 folder of this repository
 - Install a **Python** runtime: https://www.python.org/
 - Install some Python librairies: `pip install torch numpy scipy tqdm chess`
 - Download the [pgn-extract](https://www.cs.kent.ac.uk/people/staff/djb/pgn-extract/) tool and put the `pgn-extract.exe` file in the folder `./1. data preparation/`
