@@ -53,7 +53,7 @@ Then launch the script `prepare.bat` in the folder `./1. data preparation/` to o
 
 This script will parse games and compute the average win ratio for each encountered position in all the games. It will also add some other statistical information (popcount, number of occurences of each position).
 
-Copy the `positions-shuffled.txt` file to the folder `./2. training/positions/`
+Copy the `positions-shuffled.txt` file to the folder `./2. training/positions/`.
 
 Note that, **by default, all games after 31.12.2023 will be ignored**. You can easily modify this by editing the script `prepare.bat` (see source to discover how).
 
