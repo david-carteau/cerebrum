@@ -11,7 +11,7 @@ The **Cerebrum library** can be used to train and utilize "[NNUE](https://www.ch
 - **Training is now based on games results** (from which a win ratio is deduced for each position during a game) and **material only** !
 - **Data preparation** scripts are provided to automate the preparation of training data (using one or several pgn files)
 - **Network quantization** is performed at the end of each training epoch, letting the choice between better accuracy or increased inference speed
-- A very basic UCI chess engine is providedn in two versions (standard or quantized) to show how to load and use the network trained
+- A very basic UCI chess engine is provided in two versions (standard or quantized) to show how to load and use the network trained
 - Inference C code is now also available in two versions (standard or quantized)
 
 <br/>
@@ -64,7 +64,7 @@ r5k1/pb3rb1/3Rn1p1/Rp2p2p/4PP1P/2P1BNP1/4NK2/8 b 22 1 0.5<p>
 
 <br/>
 
-The second option is useful when you already have a good idea of the win ratio associated to some positions. In this case, the file must be called `positions-shuffled.txt`, and be placed in the folder `./1. training/2. training/positions/`
+The second option is useful when you already have a good idea of the win ratio associated to some positions. In this case, the file must be called `positions-shuffled.txt`, and be placed in the folder `./1. training/2. training/positions/`.
 
 <br/>
 
