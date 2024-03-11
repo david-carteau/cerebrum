@@ -168,6 +168,10 @@ Important: to obtain the exact same neural network, let the `FORCE_CPU_DEVICE` v
 
 <br/>
 
+Additionnal information can be found on the [Orion's website](https://www.orionchess.com/).
+
+<br/>
+
 ## Copyright, license
 
 Feel free to adapt the library to meet your specific needs, and do not hesitate to provide feedback ! 🌟
