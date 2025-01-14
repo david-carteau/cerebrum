@@ -62,11 +62,10 @@ NN_MT = 0.5
 
 # network architecture (adjust if needed)
 NN_SIZE_L0 = 768
-NN_SIZE_L1 = 128
+NN_SIZE_L1 = 256
 NN_SIZE_L2 = 2
 
 # learning rate scheduler (adjust if needed)
-LR = [0.0100, 0.0050, 0.0010, 0.0005, 0.0001]
 LR = [0.0080, 0.0040, 0.0020, 0.0010, 0.0005]
 
 # batch size (adjust if needed)
