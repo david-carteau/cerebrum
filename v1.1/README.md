@@ -10,7 +10,7 @@ Inference code is provided for embedding and using the trained network in a C/C+
 
 By default, since v1.1, the network architecture is `2x(768x256)x2`.
 
-Do not hesitate to adapt the library to your own needs, and/or to use newer/better NNUE libraries for more flexibility/performance (e.g. [Bullet](https://github.com/jw1912/bullet/tree/main)) !
+Do not hesitate to adapt the library to your own needs, and/or to use newer/better NNUE libraries for more flexibility/performance (e.g. [Bullet](https://github.com/jw1912/bullet/tree/main))!
 
 <br/>
 
