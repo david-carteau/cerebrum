@@ -4,7 +4,7 @@
 
 The **Cerebrum library** can be used to easily train a **first** "[NNUE](https://www.chessprogramming.org/NNUE)-like" neural network for a chess engine. It was originally designed and built for the [Orion UCI chess engine](https://www.orionchess.com/).
 
-Its originality lies in using only game results parsed from pgn files provided by the user, plus material values computed on the fly, as targets for prediction.
+Its originality lies in using only game results, parsed from pgn files provided by the user, and material values, computed on the fly, as targets for prediction. Both predicted values (game result and material) can be used for board evaluation, either separately or together, with coefficients that can be set at inference time. 
 
 Inference code is provided for embedding and using the trained network in a C/C++ or Python project, in two alternatives: standard (for accuracy) or quantized (for speed).
 
@@ -19,6 +19,7 @@ Do not hesitate to adapt the library to your own needs, and/or to use newer/bett
 - **Less memory requirements** for data preparation
 - **Small fixes** in training and inference code
 - **Simpler network architecture**, down from `2x(768x128)x32x32x2` to `2x(768x256)x2`
+- **Better UX** during training, with more information on progress
 
 <br/>
 
