@@ -84,7 +84,7 @@ EPOCHS = len(LR)
 # Q value (do not modify)
 # Q and -Q (+/- 1.98) are the minimum and maximum values allowed for weights and biases
 # this opens the possibility to use a quantized version of the network (post-training)
-Q = 127/64
+Q = 127 / 64
 
 # structure of folders (do not modify)
 DATA_PATH = "./data"
