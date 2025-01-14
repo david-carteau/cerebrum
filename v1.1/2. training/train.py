@@ -39,7 +39,6 @@ import pickle
 import random
 
 from tqdm import tqdm
-from multiprocessing.pool import Pool
 
 
 # random seed (adjust if needed)
