@@ -247,6 +247,7 @@ class Trainer():
         if CONVERT_CP_TO_WR:
             # inspired by https://www.chessprogramming.org/Pawn_Advantage,_Win_Percentage,_and_Elo
             mt = 1 / (1 + 10**(-mt/400))
+			mt = 2.0 * mt - 1.0
         else:
             # idea: one queen ahead --> mt = +0.9 --> close to / similar to a win ratio of +1.0
             mt /= 1000.0
