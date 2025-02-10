@@ -574,15 +574,11 @@ def main():
     print()
     
     # creation of folders structure
-    
     for path in [DATA_PATH, MODELS_PATH, NETWORKS_PATH]:
         if not os.path.exists(path):
             os.mkdir(path)
-        #end if
-    #end for
     
     # let's go !
-    
     dataset = Dataset()
     trainer = Trainer()
     
@@ -592,29 +588,28 @@ def main():
         print("Epoch:", epoch + 1, "/", EPOCHS, " - ", "Learning rate:", format(rate))
         
         losses = []
+        final_loss = 0  # Initialize final_loss
         
         for X_train, y_train in (pbar := tqdm(dataset)):
             loss = trainer.fit(X_train, y_train, lr=rate)
             losses.append(loss)
             
-            loss = losses[-32:]
-            loss = sum(loss) / len(loss)
+            recent_losses = losses[-32:]
+            avg_loss = sum(recent_losses) / len(recent_losses)
+            final_loss = avg_loss  # Store the final average loss
             
-            pbar.set_postfix({"Loss:": format(loss)})
-        #end for
+            pbar.set_postfix({"Loss:": format(avg_loss)})
         
-        model_path = f'{MODELS_PATH}/epoch-{epoch + 1}-{format(loss)}.pt'
+        model_path = f'{MODELS_PATH}/epoch-{epoch + 1}-{format(final_loss)}.pt'
         torch.save(trainer.model, model_path)
         
         save_network(trainer.model, epoch)
         save_network(trainer.model, epoch, quantization=True)
         
         print()
-    #end for
     
     print("Training complete !")
     print()
-#end with
 
 
 if __name__ == "__main__":
