@@ -55,6 +55,8 @@ Optionally (for better results):
 - Download the [3, 4, 5 pieces](http://tablebase.sesse.net/syzygy/3-4-5/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/3-4-5/`
 - Download the [6 pieces](http://tablebase.sesse.net/syzygy/6-WDL/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/6-pieces/`
 
+<br/>
+
 Optionally (for faster training, if you have an NVIDIA GPU):
 
 - `pip install torch --index-url https://download.pytorch.org/whl/cu124`
