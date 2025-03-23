@@ -23,7 +23,7 @@ SOFTWARE.
 
 ##############################################################################
 ## NAME: cerebrum.py (UCI chess engine)                                     ##
-## AUTHOR: David Carteau, France, February 2025                             ##
+## AUTHOR: David Carteau, France, March 2025                                ##
 ## LICENSE: MIT (see above and "license.txt" file content)                  ##
 ##############################################################################
 
@@ -40,8 +40,9 @@ import random
 import numpy as np
 
 NN_SIZE_L0 = 768
-NN_SIZE_L1 = 256
-NN_SIZE_L2 = 2
+NN_SIZE_L1 = 128
+NN_SIZE_L2 = 32
+NN_SIZE_L3 = 2
 
 
 def nn_load(filepath):
@@ -54,10 +55,10 @@ def nn_load(filepath):
     
     print(f'{name} by {author}')
     
-    wr_factor = float(lines[2].replace("wr=", "").strip())
-    mt_factor = float(lines[3].replace("mt=", "").strip())
+    expected = int(lines[2].replace("parameters=", "").strip())
     
-    expected = int(lines[4].replace("parameters=", "").strip())
+    wr_factor = float(lines[3].replace("wr=", "").strip())
+    mt_factor = float(lines[4].replace("mt=", "").strip())
     
     lines = lines[5:]
     
@@ -67,9 +68,12 @@ def nn_load(filepath):
     W1 = np.zeros((NN_SIZE_L2, NN_SIZE_L1 * 2), dtype=int)
     B1 = np.zeros(NN_SIZE_L2, dtype=int)
     
+    W2 = np.zeros((NN_SIZE_L3, NN_SIZE_L2), dtype=int)
+    B2 = np.zeros(NN_SIZE_L3, dtype=int)
+    
     loaded = 0
     
-    for array in [W0, B0, W1, B1]:
+    for array in [W0, B0, W1, B1, W2, B2]:
         if array.ndim == 1:
             for col in range(array.shape[0]):
                 array[col] = int(lines[loaded])
@@ -94,13 +98,14 @@ def nn_load(filepath):
     
     W0 = W0.T
     W1 = W1.T
+    W2 = W2.T
     
-    return W0, B0, W1, B1, wr_factor, mt_factor
+    return W0, B0, W1, B1, W2, B2, wr_factor, mt_factor
 #end def
 
 
 def nn_evaluate(network, features_stm, features_opp):
-    W0, B0, W1, B1, wr_factor, mt_factor = network
+    W0, B0, W1, B1, W2, B2, wr_factor, mt_factor = network
     
     acc_w = np.copy(B0)
     
@@ -119,11 +124,15 @@ def nn_evaluate(network, features_stm, features_opp):
     
     L2 = np.matmul(L1, W1) + (B1 * 64)
     L2 //= 64
+    L2 = np.clip(L2, 0, 127)
     
-    L2 = L2.astype(float) / 64.0
+    L3 = np.matmul(L2, W2) + (B2 * 64)
+    L3 //= 64
     
-    wr = L2[0]
-    mt = L2[1]
+    L3 = L3.astype(float) / 64.0
+    
+    wr = L3[0]
+    mt = L3[1]
     
     return (wr * wr_factor + mt * mt_factor)
 #end def

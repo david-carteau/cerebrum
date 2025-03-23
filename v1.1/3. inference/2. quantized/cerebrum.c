@@ -23,53 +23,52 @@
 
 /****************************************************************************/
 /** NAME: cerebrum.c (inference)                                           **/
-/** AUTHOR: David Carteau, France, February 2025                           **/
+/** AUTHOR: David Carteau, France, March 2025                              **/
 /** LICENSE: MIT (see above and "license.txt" file content)                **/
 /****************************************************************************/
 
 /*
- * Simplified example of usage (to adapt to your engine) :
+ * Simplified example of usage (to adapt to your engine):
  * 
- * Assuming that pieces are stored in bitboards
- * with WHITE=0, BLACK=1, PAWN=0, KNIGHT=1, BISHOP=2, ROOK=3, QUEEN=4, KING=5
+ * Assuming that pieces are stored in bitboards with a1=0 and h8=63
+ * Assuming for colors that WHITE=0, BLACK=1
+ * Assuming	for pieces that PAWN=0, KNIGHT=1, BISHOP=2, ROOK=3, QUEEN=4, KING=5
+ * 
+ * 1) when starting:
+ * #include "cerebrum.h"
+ * nn_load(NN_FILE);
+ *
+ * NN_Accumulator accumulator;
+ * NN_Accumulator accumulator_copy;
  * 
  * const uint64_t* whites = &white.pieces[PAWN];
  * const uint64_t* blacks = &black.pieces[PAWN];
  * 
- * 1) when starting :
- * #include "cerebrum.h"
- * NN_Accumulator accumulator;
- * nn_load(NN_FILE);
- * 
- * 2) when initialising a position :
+ * 2) when initialising a position:
  * nn_update_all_pieces(accumulator, whites, blacks);
  * 
- * 3) when making move :
- * memcpy(&save, &accumulator, sizeof(accumulator));
+ * 3) when making move:
+ * memcpy(&accumulator_copy, &accumulator, sizeof(accumulator));
  * 
  * if (castling || promotion || capture_en_passant) {
- *     nn_update_all_pieces(next_ply->accumulator, whites, blacks);
+ *     nn_update_all_pieces(accumulator, whites, blacks);
  * } else {
- *     nn_mov_piece(next_ply->accumulator, moved - 1, color == WHITE ? 0 : 1, from, to);
+ *     nn_mov_piece(accumulator, type_of_moved_piece, color == WHITE ? 0 : 1, from, to);
  *     
  *     if (captured) {
- *         nn_del_piece(next_ply->accumulator, captured - 1, color == WHITE ? 1 : 0, to);
+ *         nn_del_piece(accumulator, type_of_captured_piece, color == WHITE ? 1 : 0, to);
  *     }
  * }
  * 
- * 4) when unmaking move :
- * memcpy(&accumulator, &save, sizeof(save));
+ * 4) when unmaking move:
+ * memcpy(&accumulator, &accumulator_copy, sizeof(accumulator));
  * 
- * 5) when evaluating :
+ * 5) when evaluating:
  * nn_evaluate(accumulator, (color == WHITE ? 0 : 1));
  * 
- * Important notes about evaluation:
+ * Important notes:
  * - evaluation returned is from the side-to-move point of view
  * - evaluation returned needs to be multiplied by 1000 to be equivalent to centipawns
- * 
- * To get the best possible inference speed:
- * - define the C macro 'NN_WITH_AVX' (e.g. '-D NN_WITH_AVX' flag for clang/gcc)
- * - make sure that the AVX and AVX2 instruction sets are enabled ('-mavx -mavx2' flags for clang/gcc)
  */
 
 #include "cerebrum.h"
@@ -250,6 +249,18 @@ int nn_convert(void) {
 		return -1;
 	}
 	
+	// number of parameters
+	
+	int32_t loaded = 0;
+	int32_t expected = 0;
+	
+	if (fgets(line, 256, file) == NULL || sscanf(line, "parameters=%d", &expected) != 1) {
+		printf("info debug NN file : ERROR while parsing 'parameters'\n");
+		fclose(file);
+		free(st);
+		return -1;
+	}
+	
 	// balance between win ratio and material
 	
 	float f = 0.0f;
@@ -272,17 +283,7 @@ int nn_convert(void) {
 	
 	st->mt = f;
 	
-	// number of parameters
-	
-	int32_t loaded = 0;
-	int32_t expected = 0;
-	
-	if (fgets(line, 256, file) == NULL || sscanf(line, "parameters=%d", &expected) != 1) {
-		printf("info debug NN file : ERROR while parsing 'parameters'\n");
-		fclose(file);
-		free(st);
-		return -1;
-	}
+	// weights and biases
 	
 	int8_t value = 0;
 	

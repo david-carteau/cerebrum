@@ -23,7 +23,7 @@
 
 /****************************************************************************/
 /** NAME: cerebrum.h (inference)                                           **/
-/** AUTHOR: David CARTEAU, France, February 2025                           **/
+/** AUTHOR: David CARTEAU, France, March 2025                              **/
 /** LICENSE: MIT (see above and "license.txt" file content)                **/
 /****************************************************************************/
 
@@ -52,20 +52,10 @@
 #define None -1
 
 // network architecture
-
-/* make sure to use:
- * - 768 for the first layer
- * - None, or multiples of 32, for the hidden layer(s)
- * - 2 for the last layer
- *
- * for the hidden layer(s), multiples of 32 are required
- * ONLY if you use the AVX and/or FMA set(s) of instructions
- */
-
 #define NN_SIZE_L0 768
-#define NN_SIZE_L1 256
-#define NN_SIZE_L2 2
-#define NN_SIZE_L3 None
+#define NN_SIZE_L1 128
+#define NN_SIZE_L2 32
+#define NN_SIZE_L3 2
 #define NN_SIZE_L4 None
 
 
