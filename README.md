@@ -4,7 +4,7 @@
 
 The **Cerebrum library** can be used to easily train a **first** "[NNUE](https://www.chessprogramming.org/NNUE)-like" neural network for a chess engine. It was originally designed and built for the [Orion UCI chess engine](https://www.orionchess.com/).
 
-Its originality lies in using only game results, parsed from pgn files provided by the user, and material values, computed on the fly, as targets for prediction. Both predicted values (game result and material) can be used for board evaluation, either separately or together, with coefficients that can be set at inference time. 
+Its originality lies in using only game results, parsed from pgn files provided by the user, and material values, computed on the fly, as targets for prediction. Both predicted values (game result and material) can be used for board evaluation.
 
 Inference code is provided for embedding and using the trained network in a C/C++ or Python project, in two alternatives: standard (for accuracy) or quantized (for speed).
 
@@ -14,9 +14,10 @@ Do not hesitate to adapt the library to your own needs, and/or to use newer/bett
 
 ## Changes in 1.1
 
-- **Less memory requirements** for data preparation
-- **Configurable network architecture** with 0, 1 or 2 hidden layers (default: `2x(768→256)→2`)
-- **Improved information displayed** during network training
+- **Lower memory requirements** for data preparation
+- **Better training convergence** with improved feedback
+- **Configurable network architecture** with 0, 1 or 2 hidden layers
+- **New default (simpler) architecture**: `2x(768→128)→32→2` (1 hidden layer)
 
 <br/>
 
@@ -54,8 +55,6 @@ Optionally (for better results):
 
 - Download the [3, 4, 5 pieces](http://tablebase.sesse.net/syzygy/3-4-5/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/3-4-5/`
 - Download the [6 pieces](http://tablebase.sesse.net/syzygy/6-WDL/) endgame Syzygy tablebases and put them in the folder `./1. data preparation/syzygy/6-pieces/`
-
-<br/>
 
 Optionally (for faster training, if you have an NVIDIA GPU):
 
